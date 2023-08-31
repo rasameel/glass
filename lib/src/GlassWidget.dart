@@ -15,7 +15,7 @@ extension GlassWidget<T extends Widget> on T {
   /// * [clipBehaviour]: Defaults to [Clip.antiAlias].
   /// * [tileMode]: Defines what happens at the edge of a gradient or the sampling of a source image in an [ImageFilter].
   /// * [clipper]: If non-null, determines which clip to use.
-  ClipRRect asGlass({
+  Widget asGlass({
     double blurX = 10.0,
     double blurY = 10.0,
     Color tintColor = Colors.white,
@@ -23,12 +23,13 @@ extension GlassWidget<T extends Widget> on T {
     BorderRadius? clipBorderRadius = BorderRadius.zero,
     Clip clipBehaviour = Clip.antiAlias,
     TileMode tileMode = TileMode.clamp,
-    CustomClipper<RRect>? clipper,
+    // CustomClipper<RRect>? clipper,
   }) {
-    return ClipRRect(
-      clipper: clipper,
+    return Container(
       clipBehavior: clipBehaviour,
-      borderRadius: clipBorderRadius,
+      decoration: BoxDecoration(
+        borderRadius: clipBorderRadius,
+      ),
       child: BackdropFilter(
         filter: new ImageFilter.blur(
           sigmaX: blurX,
